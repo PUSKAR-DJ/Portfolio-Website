@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Senior Full-Stack Developer",
+    "company": "TechCorp Solutions",
+    "location": "San Francisco, CA",
+    "period": "2022 - Present",
+    "type": "Full-time",
+    "description": [
+      "Led development of scalable web applications serving 100K+ users",
+      "Architected microservices infrastructure reducing response time by 40%",
+      "Mentored junior developers and established coding best practices",
+      "Implemented CI/CD pipelines improving deployment efficiency by 60%"
+    ],
+    "technologies": ["React", "Node.js", "TypeScript", "AWS", "Docker", "PostgreSQL"]
+  },
+  {
+    "title": "Full-Stack Developer",
+    "company": "StartupHub Inc.",
+    "location": "Austin, TX",
+    "period": "2020 - 2022",
+    "type": "Full-time",
+    "description": [
+      "Developed and maintained multiple client projects using modern web technologies",
+      "Collaborated with design team to implement pixel-perfect user interfaces",
+      "Optimized application performance resulting in 50% faster load times",
+      "Built RESTful APIs and integrated third-party services"
+    ],
+    "technologies": ["React", "Express.js", "MongoDB", "Vue.js", "Python", "Django"]
+  },
+  {
+    "title": "Frontend Developer",
+    "company": "WebCraft Agency",
+    "location": "Remote",
+    "period": "2019 - 2020",
+    "type": "Contract",
+    "description": [
+      "Created responsive web applications for diverse client portfolio",
+      "Implemented modern UI/UX designs with focus on accessibility",
+      "Collaborated with backend teams to integrate APIs and services",
+      "Delivered projects on time with 98% client satisfaction rate"
+    ],
+    "technologies": ["JavaScript", "React", "Tailwind CSS", "Git", "Figma"]
+  },
+  {
+    "title": "Junior Web Developer",
+    "company": "CodeStart Solutions",
+    "location": "New York, NY",
+    "period": "2018 - 2019",
+    "type": "Full-time",
+    "description": [
+      "Developed responsive websites using HTML, CSS, and JavaScript",
+      "Assisted in debugging and testing web applications",
+      "Learned modern development workflows and version control",
+      "Contributed to team projects and gained valuable industry experience"
+    ],
+    "technologies": ["HTML", "CSS", "JavaScript", "jQuery", "Bootstrap", "PHP"]
+  }
+]

@@ -1,46 +1,28 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Card } from './ui/card';
 import { Progress } from './ui/progress';
 
 export function Skills() {
-  const skillCategories = [
-    {
-      title: 'Frontend Development',
-      skills: [
-        { name: 'React/Next.js', level: 95 },
-        { name: 'TypeScript', level: 90 },
-        { name: 'Tailwind CSS', level: 95 },
-        { name: 'Vue.js', level: 80 },
-        { name: 'JavaScript (ES6+)', level: 95 },
-      ],
-    },
-    {
-      title: 'Backend Development',
-      skills: [
-        { name: 'Node.js', level: 90 },
-        { name: 'Express.js', level: 85 },
-        { name: 'Python/Django', level: 80 },
-        { name: 'PostgreSQL', level: 85 },
-        { name: 'MongoDB', level: 80 },
-      ],
-    },
-    {
-      title: 'Tools & Technologies',
-      skills: [
-        { name: 'Git/GitHub', level: 95 },
-        { name: 'Docker', level: 80 },
-        { name: 'AWS/Cloud', level: 75 },
-        { name: 'CI/CD', level: 80 },
-        { name: 'Testing (Jest/Cypress)', level: 85 },
-      ],
-    },
-  ];
+  const [skillCategories, setSkillCategories] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
 
-  const technologies = [
-    'React', 'Node.js', 'TypeScript', 'Python', 'PostgreSQL', 'MongoDB',
-    'AWS', 'Docker', 'Git', 'Tailwind', 'Next.js', 'Express', 'Vue.js',
-    'Jest', 'Cypress', 'Redux', 'GraphQL', 'REST API'
-  ];
+  useEffect(() => {
+    async function fetchSkills() {
+      try {
+        const response = await fetch('/skills.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setSkillCategories(data.skillCategories);
+        setTechnologies(data.technologies);
+      } catch (error) {
+        console.error("Failed to fetch skills data:", error);
+      }
+    }
+    fetchSkills();
+  }, []);
 
   return (
     <section id="skills" className="py-20 bg-accent/5">

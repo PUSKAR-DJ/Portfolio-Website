@@ -1,0 +1,39 @@
+{
+  "contactInfo": [
+    {
+      "icon": "Mail",
+      "label": "Email",
+      "value": "puskar.saha@example.com",
+      "href": "mailto:puskar.saha@example.com"
+    },
+    {
+      "icon": "Phone",
+      "label": "Phone",
+      "value": "+1 (555) 123-4567",
+      "href": "tel:+15551234567"
+    },
+    {
+      "icon": "MapPin",
+      "label": "Location",
+      "value": "San Francisco, CA",
+      "href": null
+    }
+  ],
+  "socialLinks": [
+    {
+      "icon": "Github",
+      "label": "GitHub",
+      "href": "https://github.com/puskarsaha"
+    },
+    {
+      "icon": "Linkedin",
+      "label": "LinkedIn",
+      "href": "https://linkedin.com/in/puskarsaha"
+    },
+    {
+      "icon": "Twitter",
+      "label": "Twitter",
+      "href": "https://twitter.com/puskarsaha"
+    }
+  ]
+}

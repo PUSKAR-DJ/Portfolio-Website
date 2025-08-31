@@ -1,84 +1,29 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { GraduationCap, Award, Calendar, MapPin } from 'lucide-react';
 
 export function Education() {
-  const education = [
-    {
-      degree: 'Master of Science in Computer Science',
-      institution: 'Stanford University',
-      location: 'Stanford, CA',
-      period: '2016 - 2018',
-      gpa: '3.8/4.0',
-      achievements: [
-        'Thesis: "Machine Learning Applications in Web Development"',
-        'Dean\'s List for 3 consecutive semesters',
-        'Research Assistant in AI Lab',
-        'Teaching Assistant for Data Structures course',
-      ],
-      coursework: ['Advanced Algorithms', 'Machine Learning', 'Database Systems', 'Software Engineering'],
-    },
-    {
-      degree: 'Bachelor of Science in Software Engineering',
-      institution: 'University of California, Berkeley',
-      location: 'Berkeley, CA',
-      period: '2012 - 2016',
-      gpa: '3.7/4.0',
-      achievements: [
-        'Graduated Magna Cum Laude',
-        'President of Computer Science Society',
-        'Winner of Annual Hackathon (2015, 2016)',
-        'Scholarship recipient for academic excellence',
-      ],
-      coursework: ['Data Structures', 'Web Development', 'Computer Networks', 'Software Design'],
-    },
-  ];
+  const [education, setEducation] = useState([]);
+  const [certifications, setCertifications] = useState([]);
 
-  const certifications = [
-    {
-      name: 'AWS Certified Solutions Architect',
-      issuer: 'Amazon Web Services',
-      date: '2023',
-      level: 'Professional',
-      credentialId: 'AWS-SAA-12345',
-    },
-    {
-      name: 'Google Cloud Professional Developer',
-      issuer: 'Google Cloud',
-      date: '2023',
-      level: 'Professional',
-      credentialId: 'GCP-PD-67890',
-    },
-    {
-      name: 'MongoDB Certified Developer',
-      issuer: 'MongoDB Inc.',
-      date: '2022',
-      level: 'Associate',
-      credentialId: 'MDB-DEV-11111',
-    },
-    {
-      name: 'React Developer Certification',
-      issuer: 'Meta',
-      date: '2022',
-      level: 'Professional',
-      credentialId: 'META-RD-22222',
-    },
-    {
-      name: 'Node.js Application Developer',
-      issuer: 'OpenJS Foundation',
-      date: '2021',
-      level: 'Certified',
-      credentialId: 'NODEJS-AD-33333',
-    },
-    {
-      name: 'Docker Certified Associate',
-      issuer: 'Docker Inc.',
-      date: '2021',
-      level: 'Associate',
-      credentialId: 'DOCKER-CA-44444',
-    },
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/education.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setEducation(data.education);
+        setCertifications(data.certifications);
+      } catch (error) {
+        console.error("Failed to fetch education data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <section id="education" className="py-20 bg-background">
@@ -186,7 +131,7 @@ export function Education() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
               <motion.div
-                key={index}
+                key={cert.name}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}

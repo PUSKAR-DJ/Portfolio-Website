@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
@@ -8,69 +8,23 @@ import { ExternalLink, Github, Filter } from 'lucide-react';
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState('All');
+  const [projects, setProjects] = useState([]);
 
-  const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with real-time inventory management, secure payment processing, and admin dashboard.',
-      image: 'https://images.unsplash.com/photo-1554306274-f23873d9a26c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMHByb2plY3R8ZW58MXx8fHwxNzU2MzY3NDAzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS'],
-      category: 'Full-Stack',
-      github: 'https://github.com/puskarsaha/ecommerce-platform',
-      live: 'https://ecommerce-demo.puskarsaha.dev',
-      featured: true,
-    },
-    {
-      title: 'Task Management App',
-      description: 'Collaborative project management tool with real-time updates, team collaboration features, and advanced reporting.',
-      image: 'https://images.unsplash.com/photo-1555209183-8facf96a4349?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjBzZXR1cHxlbnwxfHx8fDE3NTY0NzMyMTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      technologies: ['Vue.js', 'Express.js', 'MongoDB', 'Socket.io'],
-      category: 'Frontend',
-      github: 'https://github.com/puskarsaha/task-manager',
-      live: 'https://tasks.puskarsaha.dev',
-      featured: true,
-    },
-    {
-      title: 'Weather Analytics Dashboard',
-      description: 'Real-time weather data visualization with predictive analytics and location-based forecasting.',
-      image: 'https://images.unsplash.com/photo-1554306274-f23873d9a26c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMHByb2plY3R8ZW58MXx8fHwxNzU2MzY3NDAzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      technologies: ['React', 'D3.js', 'Python', 'FastAPI'],
-      category: 'Data Visualization',
-      github: 'https://github.com/puskarsaha/weather-dashboard',
-      live: 'https://weather.puskarsaha.dev',
-      featured: false,
-    },
-    {
-      title: 'Social Media API',
-      description: 'RESTful API for social media platform with authentication, real-time messaging, and content moderation.',
-      image: 'https://images.unsplash.com/photo-1555209183-8facf96a4349?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjBzZXR1cHxlbnwxfHx8fDE3NTY0NzMyMTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      technologies: ['Node.js', 'GraphQL', 'Redis', 'Docker'],
-      category: 'Backend',
-      github: 'https://github.com/puskarsaha/social-api',
-      live: null,
-      featured: false,
-    },
-    {
-      title: 'Portfolio Website Builder',
-      description: 'No-code solution for creating professional portfolio websites with customizable templates and CMS integration.',
-      image: 'https://images.unsplash.com/photo-1554306274-f23873d9a26c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXZlbG9wbWVudCUyMHByb2plY3R8ZW58MXx8fHwxNzU2MzY3NDAzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      technologies: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind'],
-      category: 'Full-Stack',
-      github: 'https://github.com/puskarsaha/portfolio-builder',
-      live: 'https://portfolio-builder.puskarsaha.dev',
-      featured: true,
-    },
-    {
-      title: 'Machine Learning Model Trainer',
-      description: 'Web interface for training and deploying machine learning models with real-time performance monitoring.',
-      image: 'https://images.unsplash.com/photo-1555209183-8facf96a4349?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2RpbmclMjB3b3Jrc3BhY2UlMjBzZXR1cHxlbnwxfHx8fDE3NTY0NzMyMTd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      technologies: ['Python', 'Flask', 'TensorFlow', 'React'],
-      category: 'Machine Learning',
-      github: 'https://github.com/puskarsaha/ml-trainer',
-      live: null,
-      featured: false,
-    },
-  ];
+  useEffect(() => {
+    async function fetchProjects() {
+      try {
+        const response = await fetch('/projects.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      }
+    }
+    fetchProjects();
+  }, []);
 
   const categories = ['All', 'Full-Stack', 'Frontend', 'Backend', 'Data Visualization', 'Machine Learning'];
 

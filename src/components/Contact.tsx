@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -6,7 +7,16 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
+
+const iconMap = {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Twitter,
+};
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -16,45 +26,25 @@ export function Contact() {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contactInfo, setContactInfo] = useState([]);
+  const [socialLinks, setSocialLinks] = useState([]);
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'puskar.saha@example.com',
-      href: 'mailto:puskar.saha@example.com',
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'San Francisco, CA',
-      href: null,
-    },
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/puskarsaha',
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://linkedin.com/in/puskarsaha',
-    },
-    {
-      icon: Twitter,
-      label: 'Twitter',
-      href: 'https://twitter.com/puskarsaha',
-    },
-  ];
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('/contact.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setContactInfo(data.contactInfo);
+        setSocialLinks(data.socialLinks);
+      } catch (error) {
+        console.error("Failed to fetch contact data:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -111,38 +101,41 @@ export function Contact() {
 
             {/* Contact Details */}
             <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={info.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="p-4 bg-gradient-to-br from-card to-secondary/5 border-0 shadow-md hover:shadow-lg transition-shadow">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                          <info.icon className="h-6 w-6 text-primary" />
+              {contactInfo.map((info, index) => {
+                const IconComponent = iconMap[info.icon];
+                return (
+                  <motion.div
+                    key={info.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="p-4 bg-gradient-to-br from-card to-secondary/5 border-0 shadow-md hover:shadow-lg transition-shadow">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                            {IconComponent && <IconComponent className="h-6 w-6 text-primary" />}
+                          </div>
+                        </div>
+                        <div>
+                          <h4 className="font-medium">{info.label}</h4>
+                          {info.href ? (
+                            <a
+                              href={info.href}
+                              className="text-muted-foreground hover:text-primary transition-colors"
+                            >
+                              {info.value}
+                            </a>
+                          ) : (
+                            <p className="text-muted-foreground">{info.value}</p>
+                          )}
                         </div>
                       </div>
-                      <div>
-                        <h4 className="font-medium">{info.label}</h4>
-                        {info.href ? (
-                          <a
-                            href={info.href}
-                            className="text-muted-foreground hover:text-primary transition-colors"
-                          >
-                            {info.value}
-                          </a>
-                        ) : (
-                          <p className="text-muted-foreground">{info.value}</p>
-                        )}
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Social Links */}
@@ -154,24 +147,27 @@ export function Contact() {
             >
               <h4 className="mb-4">Follow Me</h4>
               <div className="flex space-x-4">
-                {socialLinks.map((social) => (
-                  <Button
-                    key={social.label}
-                    variant="outline"
-                    size="lg"
-                    asChild
-                    className="w-12 h-12 p-0 hover:scale-110 transition-transform"
-                  >
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
+                {socialLinks.map((social) => {
+                  const IconComponent = iconMap[social.icon];
+                  return (
+                    <Button
+                      key={social.label}
+                      variant="outline"
+                      size="lg"
+                      asChild
+                      className="w-12 h-12 p-0 hover:scale-110 transition-transform"
                     >
-                      <social.icon className="h-5 w-5" />
-                    </a>
-                  </Button>
-                ))}
+                      <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.label}
+                      >
+                        {IconComponent && <IconComponent className="h-5 w-5" />}
+                      </a>
+                    </Button>
+                  );
+                })}
               </div>
             </motion.div>
           </motion.div>

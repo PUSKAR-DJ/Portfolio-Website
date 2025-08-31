@@ -1,14 +1,28 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Card } from './ui/card';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 
 export function About() {
-  const stats = [
-    { label: 'Years of Experience', value: '5+' },
-    { label: 'Projects Completed', value: '50+' },
-    { label: 'Technologies Mastered', value: '15+' },
-    { label: 'Happy Clients', value: '30+' },
-  ];
+  const [stats, setStats] = useState([]);
+  const [motto, setMotto] = useState('');
+
+  useEffect(() => {
+    async function fetchAboutData() {
+      try {
+        const response = await fetch('/about.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setStats(data.stats);
+        setMotto(data.motto);
+      } catch (error) {
+        console.error("Failed to fetch about data:", error);
+      }
+    }
+    fetchAboutData();
+  }, []);
 
   return (
     <section id="about" className="py-20 bg-background">
@@ -54,7 +68,7 @@ export function About() {
                 <div className="border-t pt-6">
                   <h4 className="mb-4">My Motto</h4>
                   <blockquote className="text-lg italic text-primary border-l-4 border-primary pl-4">
-                    "Code is poetry in motion, and every line should tell a story of innovation."
+                    "{motto}"
                   </blockquote>
                 </div>
               </div>
