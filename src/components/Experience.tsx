@@ -41,7 +41,7 @@ export function Experience() {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-chart-1 to-primary hidden md:block" />
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-chart-1 to-primary hidden md:block" />
 
           <div className="space-y-8">
             {experiences.map((exp, index) => (
@@ -56,10 +56,10 @@ export function Experience() {
                 }`}
               >
                 {/* Timeline dot */}
-                <div className="absolute left-6 top-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg hidden md:block" />
+                <div className="absolute left-1/2 top-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg hidden md:block transform -translate-x-1/2" />
 
                 {/* Content */}
-                <div className={index % 2 === 0 ? 'md:pr-16' : 'md:pl-16 md:col-start-2'}>
+                <div className={index % 2 === 0 ? 'md:pr-20' : 'md:pl-20 md:col-start-2'}>
                   <Card className="p-6 bg-gradient-to-br from-card to-accent/5 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                     <div className="space-y-4">
                       <div>

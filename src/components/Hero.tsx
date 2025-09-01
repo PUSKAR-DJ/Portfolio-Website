@@ -24,6 +24,7 @@ export function Hero() {
         clearInterval(timer);
       }
     }, 50);
+
     return () => clearInterval(timer);
   }, []);
 
@@ -49,32 +50,8 @@ export function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-background via-background to-accent/20">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-primary/5 rounded-full"
-            style={{
-              width: Math.random() * 300 + 50,
-              height: Math.random() * 300 + 50,
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-            }}
-            animate={{
-              x: [0, Math.random() * 200 - 100],
-              y: [0, Math.random() * 200 - 100],
-              scale: [1, Math.random() * 0.5 + 0.5],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-          />
-        ))}
-      </div>
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,var(--background)_1px,transparent_1px),linear-gradient(to_bottom,var(--background)_1px,transparent_1px)] bg-[size:2rem_2rem] [mask-image:radial-gradient(circle_at_center,white,rgba(var(--chart-1-rgb),0.5),transparent_70%)]" />
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <motion.div
@@ -82,7 +59,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-6xl lg:text-7xl mb-6 bg-gradient-to-r from-primary via-chart-1 to-primary bg-clip-text text-transparent"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -100,13 +77,13 @@ export function Hero() {
             <span className="border-r-2 border-primary animate-pulse">{text}</span>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             className="text-lg sm:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.2 }}
           >
-            Full-Stack Developer & Tech Enthusiast passionate about creating innovative 
+            Full-Stack Developer & Tech Enthusiast passionate about creating innovative
             web solutions that make a difference.
           </motion.p>
 
@@ -116,8 +93,8 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.6 }}
           >
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               onClick={scrollToAbout}
               className="bg-gradient-to-r from-primary to-chart-1 hover:opacity-90 transition-all duration-300 transform hover:scale-105"
             >
@@ -139,7 +116,7 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 2 }}
@@ -157,4 +134,4 @@ export function Hero() {
       </div>
     </section>
   );
-};
+}
