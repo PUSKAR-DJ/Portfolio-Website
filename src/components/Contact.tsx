@@ -57,7 +57,7 @@ export function Contact() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -109,8 +109,8 @@ export function Contact() {
             <div>
               <h3 className="text-2xl mb-6">Let's Connect</h3>
               <p className="text-muted-foreground mb-8 leading-relaxed">
-                I'm always interested in new opportunities, interesting projects, 
-                and meaningful conversations. Whether you have a project in mind, 
+                I'm always interested in new opportunities, interesting projects,
+                and meaningful conversations. Whether you have a project in mind,
                 need technical consultation, or just want to connect, feel free to reach out!
               </p>
             </div>
