@@ -1,9 +1,11 @@
 {
-  "stats": [
-    { "label": "Years of Experience", "value": "5+" },
-    { "label": "Projects Completed", "value": "50+" },
-    { "label": "Technologies Mastered", "value": "15+" },
-    { "label": "Happy Clients", "value": "30+" }
-  ],
-  "motto": "Code is poetry in motion, and every line should tell a story of innovation."
+  "stats": [],
+  "motto": "Proactive Computer Science Engineering student skilled in Data Structures, Algorithms, Cybersecurity, and API Testing, proficient in Java, Python, and C/C++. Engaged in significant voluntary leadership roles as an Innovation Ambassador and Events Team Lead, complementing a solid academic record and hands-on project experience.",
+  "biography": {
+    "title": "Hello, I'm Puskar Saha",
+    "paragraphs": [
+      "I'm a proactive Computer Science Engineering student with a strong foundation in Data Structures and Algorithms. I have a passion for cybersecurity and API testing, and I am proficient in Java, Python, and C/C++.",
+      "In addition to my academic record, I have held significant voluntary leadership roles as an Innovation Ambassador and Events Team Lead. I am always working to improve my web development skills and explore new technologies. "
+    ]
+  }
 }

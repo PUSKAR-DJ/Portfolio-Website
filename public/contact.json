@@ -3,19 +3,19 @@
     {
       "icon": "Mail",
       "label": "Email",
-      "value": "puskar.saha@example.com",
-      "href": "mailto:puskar.saha@example.com"
+      "value": "puskarsaha3@gmail.com",
+      "href": "mailto:puskarsaha3@gmail.com"
     },
     {
       "icon": "Phone",
       "label": "Phone",
-      "value": "+1 (555) 123-4567",
-      "href": "tel:+15551234567"
+      "value": "(+91) 9734071136",
+      "href": "tel:+919734071136"
     },
     {
       "icon": "MapPin",
       "label": "Location",
-      "value": "San Francisco, CA",
+      "value": "Katwa, West Bengal, India",
       "href": null
     }
   ],
@@ -23,17 +23,17 @@
     {
       "icon": "Github",
       "label": "GitHub",
-      "href": "https://github.com/puskarsaha"
+      "href": "https://github.com/PUSKAR-DJ"
     },
     {
       "icon": "Linkedin",
       "label": "LinkedIn",
-      "href": "https://linkedin.com/in/puskarsaha"
+      "href": "https://linkedin.com/in/puskarsaha3"
     },
     {
       "icon": "Twitter",
       "label": "Twitter",
-      "href": "https://twitter.com/puskarsaha"
+      "href": "https://www.x.com/PUSKAR_DJ"
     }
   ]
 }

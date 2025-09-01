@@ -1,54 +1,109 @@
 {
   "skillCategories": [
     {
-      "title": "Frontend Development",
+      "title": "Programming Languages",
       "skills": [
-        { "name": "React/Next.js", "level": 95 },
-        { "name": "TypeScript", "level": 90 },
-        { "name": "Tailwind CSS", "level": 95 },
-        { "name": "Vue.js", "level": 80 },
-        { "name": "JavaScript (ES6+)", "level": 95 }
+        { "name": "Python", "level": 90 },
+        { "name": "Java", "level": 85 },
+        { "name": "C/C++", "level": 85 },
+        { "name": "JavaScript", "level": 80 },
+        { "name": "SQL", "level": 75 }
       ]
     },
     {
-      "title": "Backend Development",
+      "title": "Data Science & Machine Learning",
       "skills": [
-        { "name": "Node.js", "level": 90 },
-        { "name": "Express.js", "level": 85 },
-        { "name": "Python/Django", "level": 80 },
-        { "name": "PostgreSQL", "level": 85 },
-        { "name": "MongoDB", "level": 80 }
+        { "name": "Machine Learning", "level": 75 },
+        { "name": "Artificial Intelligence", "level": 70 },
+        { "name": "Data Science", "level": 70 },
+        { "name": "NumPy", "level": 65 },
+        { "name": "Pandas", "level": 65 }
       ]
     },
     {
-      "title": "Tools & Technologies",
+      "title": "Web Technologies",
       "skills": [
-        { "name": "Git/GitHub", "level": 95 },
-        { "name": "Docker", "level": 80 },
-        { "name": "AWS/Cloud", "level": 75 },
-        { "name": "CI/CD", "level": 80 },
-        { "name": "Testing (Jest/Cypress)", "level": 85 }
+        { "name": "HTML", "level": 85 },
+        { "name": "CSS", "level": 85 },
+        { "name": "Node.js", "level": 80 },
+        { "name": "React.js", "level": 80 }
+      ]
+    },
+    {
+      "title": "Databases",
+      "skills": [
+        { "name": "OracleDB (OracleXE 11g)", "level": 70 },
+        { "name": "MongoDB", "level": 75 },
+        { "name": "PostgreSQL", "level": 75 },
+        { "name": "Firebase Studio", "level": 60 }
+      ]
+    },
+    {
+      "title": "Core CS Fundamentals",
+      "skills": [
+        { "name": "Data Structures", "level": 90 },
+        { "name": "Algorithms", "level": 90 },
+        { "name": "Object-Oriented Programming", "level": 85 },
+        { "name": "Operating Systems", "level": 70 },
+        { "name": "Computer Networks", "level": 75 }
+      ]
+    },
+    {
+      "title": "Analytics & Math",
+      "skills": [
+        { "name": "Probability in CS", "level": 75 },
+        { "name": "Optimization Techniques", "level": 70 },
+        { "name": "Linear Algebra", "level": 70 },
+        { "name": "Statistics", "level": 70 }
+      ]
+    },
+    {
+      "title": "Tools & Platforms",
+      "skills": [
+        { "name": "Git", "level": 85 },
+        { "name": "GCP", "level": 65 },
+        { "name": "Linux", "level": 70 },
+        { "name": "Arduino", "level": 60 },
+        { "name": "Google Colab", "level": 60 },
+        { "name": "PowerBI", "level": 60 }
       ]
     }
   ],
   "technologies": [
-    "React",
-    "Node.js",
-    "TypeScript",
     "Python",
-    "PostgreSQL",
+    "Java",
+    "C/C++",
+    "JavaScript",
+    "SQL",
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Data Science",
+    "NumPy",
+    "Pandas",
+    "HTML",
+    "CSS",
+    "Node.js",
+    "React.js",
+    "OracleDB (OracleXE 11g)",
     "MongoDB",
-    "AWS",
-    "Docker",
+    "PostgreSQL",
+    "Firebase Studio",
+    "Data Structures",
+    "Algorithms",
+    "Object-Oriented Programming",
+    "Operating Systems",
+    "Computer Networks",
+    "Probability in CS",
+    "Optimization Techniques",
+    "Linear Algebra",
+    "Statistics",
     "Git",
-    "Tailwind",
-    "Next.js",
-    "Express",
-    "Vue.js",
-    "Jest",
-    "Cypress",
-    "Redux",
-    "GraphQL",
-    "REST API"
+    "GCP",
+    "Linux",
+    "Arduino",
+    "Google Colab",
+    "PowerBI",
+    "Cybersecurity",
+    "API Testing"
   ]
 }

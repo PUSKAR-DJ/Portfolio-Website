@@ -6,6 +6,7 @@ import { ImageWithFallback } from './figma/ImageWithFallback';
 export function About() {
   const [stats, setStats] = useState([]);
   const [motto, setMotto] = useState('');
+  const [biography, setBiography] = useState({ title: '', paragraphs: [] });
 
   useEffect(() => {
     async function fetchAboutData() {
@@ -17,6 +18,7 @@ export function About() {
         const data = await response.json();
         setStats(data.stats);
         setMotto(data.motto);
+        setBiography(data.biography);
       } catch (error) {
         console.error("Failed to fetch about data:", error);
       }
@@ -50,19 +52,12 @@ export function About() {
             <Card className="p-8 bg-gradient-to-br from-card to-accent/10 border-0 shadow-lg">
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-2xl mb-4">Hello, I'm Puskar Saha</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    I'm a passionate full-stack developer with over 5 years of experience 
-                    building modern web applications. My journey in tech started with curiosity 
-                    and has evolved into a deep love for creating digital solutions that solve 
-                    real-world problems.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    I specialize in React, Node.js, and modern web technologies, with a strong 
-                    focus on user experience and performance optimization. When I'm not coding, 
-                    you can find me exploring new technologies, contributing to open-source 
-                    projects, or sharing knowledge with the developer community.
-                  </p>
+                  <h3 className="text-2xl mb-4">{biography.title}</h3>
+                  {biography.paragraphs.map((paragraph, index) => (
+                    <p key={index} className="text-muted-foreground leading-relaxed mb-4">
+                      {paragraph}
+                    </p>
+                  ))}
                 </div>
 
                 <div className="border-t pt-6">
@@ -85,7 +80,7 @@ export function About() {
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-chart-1/10 p-8">
                 <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1731951039706-0e793240bb32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBkZXZlbG9wZXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NTY0MTYzMDJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                  src="https://media.licdn.com/dms/image/v2/D5603AQEw1-tpQQxlhQ/profile-displayphoto-shrink_400_400/B56ZWgE_6EGUAo-/0/1742147421645?e=1759363200&v=beta&t=RDhyBdiQF9zu4vfbGC9PXHd73Iqw7ap3msCeSrxdcV8"
                   alt="Puskar Saha"
                   className="w-full h-full object-cover rounded-xl"
                 />

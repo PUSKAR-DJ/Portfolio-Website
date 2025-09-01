@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
@@ -57,12 +56,29 @@ export function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    toast.success('Message sent successfully! I\'ll get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
+      const result = await response.json();
+
+      if (response.ok) {
+        toast.success(result.message || 'Message sent successfully! I\'ll get back to you soon.');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast.error(result.message || 'Failed to send message.');
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast.error('An unexpected error occurred.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -102,7 +118,7 @@ export function Contact() {
             {/* Contact Details */}
             <div className="space-y-6">
               {contactInfo.map((info, index) => {
-                const IconComponent = iconMap[info.icon];
+                const IconComponent = iconMap[info.icon as keyof typeof iconMap];
                 return (
                   <motion.div
                     key={info.label}
@@ -148,7 +164,7 @@ export function Contact() {
               <h4 className="mb-4">Follow Me</h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social) => {
-                  const IconComponent = iconMap[social.icon];
+                  const IconComponent = iconMap[social.icon as keyof typeof iconMap];
                   return (
                     <Button
                       key={social.label}

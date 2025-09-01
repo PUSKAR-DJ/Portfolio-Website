@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown, Github, Linkedin, Mail, Twitter } from 'lucide-react';
 import { Button } from './ui/button';
+
+const iconMap = {
+  Github,
+  Linkedin,
+  Mail,
+  Twitter,
+};
 
 export function Hero() {
   const [text, setText] = useState('');
+  const [socialLinks, setSocialLinks] = useState([]);
   const fullText = "Building digital experiences with code and creativity";
-  
+
   useEffect(() => {
     let i = 0;
     const timer = setInterval(() => {
@@ -16,8 +24,21 @@ export function Hero() {
         clearInterval(timer);
       }
     }, 50);
-    
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    async function fetchSocials() {
+      try {
+        const response = await fetch('/contact.json');
+        if (!response.ok) throw new Error('Failed to fetch socials');
+        const data = await response.json();
+        setSocialLinks(data.socialLinks || []);
+      } catch (e) {
+        setSocialLinks([]);
+      }
+    }
+    fetchSocials();
   }, []);
 
   const scrollToAbout = () => {
@@ -104,21 +125,16 @@ export function Hero() {
             </Button>
             
             <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm" asChild>
-                <a href="https://github.com/puskarsaha" target="_blank" rel="noopener noreferrer">
-                  <Github className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href="https://linkedin.com/in/puskarsaha" target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="h-4 w-4" />
-                </a>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <a href="mailto:puskar.saha@example.com">
-                  <Mail className="h-4 w-4" />
-                </a>
-              </Button>
+              {socialLinks.map((social) => {
+                const IconComponent = iconMap[social.icon as keyof typeof iconMap] || Mail;
+                return (
+                  <Button key={social.label} variant="outline" size="sm" asChild>
+                    <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
+                      <IconComponent className="h-4 w-4" />
+                    </a>
+                  </Button>
+                );
+              })}
             </div>
           </motion.div>
 
@@ -141,4 +157,4 @@ export function Hero() {
       </div>
     </section>
   );
-}
+};
